@@ -5,12 +5,9 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Net;
 using System.Net.Security;
-using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
-using static System.Net.Mime.MediaTypeNames;
-using System.Runtime;
 
 namespace SQL_Server_Job_Monitor
 {
@@ -31,7 +28,7 @@ namespace SQL_Server_Job_Monitor
                 Thread.Sleep(300000);//Aguarda 5 minutos
 
             }
-            
+
         }
 
         public static void WriteLog(string log)
@@ -39,11 +36,11 @@ namespace SQL_Server_Job_Monitor
 
             string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/SQL Server Job Monitor Log.log";
             StreamWriter writer = new StreamWriter(filePath, true, Encoding.UTF8);
-            
-            
+
+
             writer.WriteLine(DateTime.Now.ToString() + " " + log);
             writer.Close();
-            
+
 
 
         }
@@ -207,9 +204,6 @@ namespace SQL_Server_Job_Monitor
             client.Close();
 
             WriteLog("Estado da conexão com o WebService: " + client.State.ToString());
-
-
-
         }
 
         // Utiliza um certificado de confiança para a conexão com a WebService
