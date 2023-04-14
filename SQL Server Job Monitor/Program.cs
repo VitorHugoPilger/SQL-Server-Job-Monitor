@@ -31,6 +31,7 @@ namespace SQL_Server_Job_Monitor
 
         public static void WriteLog(string log)
         {
+
             string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/SQL Server Job Monitor Log.log";
             StreamWriter writer = new StreamWriter(filePath, true, Encoding.UTF8);
             writer.WriteLine(DateTime.Now.ToString() + " " + log);
