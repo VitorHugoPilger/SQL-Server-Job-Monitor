@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("SQL Server Job Monitor")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Paquetá Calçados Ltda.")]
+[assembly: AssemblyCompany(".")]
 [assembly: AssemblyProduct("SQL Server Job Monitor")]
-[assembly: AssemblyCopyright("Copyright © Paquetá Calçados Ltda. 2023")]
+[assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -50,7 +50,7 @@ namespace SQL_Server_Job_Monitor
             WriteLog("Iniciando conexão com o banco de dados.");
 
             SqlConnection connection;
-            string connetionParameters = @"Data Source=sv-dc2-sql05,1434\DW;Initial Catalog=DW_AUDITORIA_SAPBO;User ID=dwpaqueta;Password=paqu3t4";
+            string connetionParameters = @"Data Source=SERVER;Initial Catalog=DB;User ID=USER;Password=PASSWORD";
             connection = new SqlConnection(connetionParameters);
             connection.Open();
 
@@ -62,38 +62,9 @@ namespace SQL_Server_Job_Monitor
                 "[DATA_INICIO]," +
                 "[STATUS]," +
                 "[TURNO_PESSOA] " +
-                "FROM [DW_AUDITORIA_SAPBO].[dbo].[PAINEL_MONITORAMENTO_JOBS_NOVO] " +
+                "FROM [TABELA DE JOBS] " +
                 "WHERE NOME IN " +
-                "('BI - Varejo Comercial MP - Dumond Capodarte'," +
-                "'BI - Varejo Logistica'," +
-                "'BI - Industria Comercial Cota'," +
-                "'BI - Industria Comercial'," +
-                "'BI - Varejo Comercial - Vendedores'," +
-                "'BI - Industria Producao'," +
-                "'BI - Varejo - Microindicadores'," +
-                "'BI - Industria Estoque'," +
-                "'BI - Painel Indicadores Corporativos'," +
-                "'BI - Corporativo Contabil'," +
-                "'BI - Corporativo RH'," +
-                "'BI - Industria Faturamento'," +
-                "'BI - Varejo Recargas'," +
-                "'BI - Industria Controladoria'," +
-                "'BI - Industria Compras'," +
-                "'BI - Varejo - Auditoria'," +
-                "'BI - Industria Desenvolvimento Produto'," +
-                "'BI - Varejo Fornecedores'," +
-                "'BI - Varejo Comparativo Comercial'," +
-                "'BI - Varejo Periodo Fiscal'," +
-                "'BI - Varejo Virtual'," +
-                "'BI - Varejo Vendas Previsao e Estoque - Tamanho'," +
-                "'BI - Varejo Preco Compra'," +
-                "'BI - Varejo Escalonador - Manual'," +
-                "'BI - Industria Depreciacao'," +
-                "'BI - Varejo Pedido Empenho'," +
-                "'BI - Varejo Remanejo'," +
-                "'BI - Varejo - Credsystem - Volume Negocio Completo'," +
-                "'BI - Urbanismo Comercial'," +
-                "'BI - Jobs Falha Teste')" +
+                "('JOBS_NAME')" +
                 "AND [STATUS] = 0"; // STATUS 0 == FALHA
             SqlDataReader reader = eventQuery.ExecuteReader();
             CheckJobs(reader);
@@ -107,12 +78,12 @@ namespace SQL_Server_Job_Monitor
         {
             WriteLog("Iniciando gravação na tabela de logs");
             SqlConnection connection;
-            string connetionParameters = @"Data Source=sv-dc2-sql05,1434\DW;Initial Catalog=DW_AUDITORIA_SAPBO;User ID=dwpaqueta;Password=paqu3t4";
+            string connetionParameters = @"Data Source=SERVER;Initial Catalog=DB;User ID=USER;Password=PASSWORD";
             connection = new SqlConnection(connetionParameters);
             connection.Open();
 
             SqlCommand logQuery = connection.CreateCommand();
-            logQuery.CommandText = $"INSERT INTO [dbo].[LOG_MONITORAMENTO_JOBS] ([DATA] ,[TIME] ,[PLANTONISTA],[JOB]) VALUES('{date}', '{time}', '{name}' ,'{job}')";
+            logQuery.CommandText = $"INSERT INTO [TABELA_LOG] ([DATA] ,[TIME] ,[PLANTONISTA],[JOB]) VALUES('{date}', '{time}', '{name}' ,'{job}')";
             logQuery.ExecuteNonQuery();
             connection.Close();
         }
@@ -162,31 +133,31 @@ namespace SQL_Server_Job_Monitor
             var number = "";
             switch (dest)
             {
-                case "ALEXSANDRE":
-                    number = "70009454";
+                case "PLANTONISTA1":
+                    number = "RAMAL";
                     break;
-                case "MATEUS":
-                    number = "70009311";
+                case "PLANTONISTA2":
+                    number = "RAMAL";
                     break;
-                case "VITOR":
-                    number = "70999253";
+                case "PLANTONISTA3":
+                    number = "RAMAL";
                     break;
             }
 
             WriteLog($"Ligando para o plantonista {dest}, número: {number}");
 
             CiscoWebDialer.WebdialerSoapServiceClient client = new CiscoWebDialer.WebdialerSoapServiceClient();
-            //https://10.22.3.59/webdialer/services/WebdialerSoapService?wsdl
+            //https://IP/webdialer/services/WebdialerSoapService?wsdl
 
 
             Credential cred = new Credential();
             UserProfile profile = new UserProfile();
-            cred.userID = "userhelpdesk";
-            cred.password = "TelecomPKT";
+            cred.userID = "USER";
+            cred.password = "PASSWORD";
 
-            profile.deviceName = "SEP847BEBE7DB3F";
-            profile.user = "userhelpdesk";
-            profile.lineNumber = "70009748";
+            profile.deviceName = "MAC";
+            profile.user = "USER";
+            profile.lineNumber = "RAMAL";
 
 
             ServicePointManager.ServerCertificateValidationCallback
