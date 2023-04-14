@@ -24,9 +24,14 @@ namespace SQL_Server_Job_Monitor
             // 2 tentativas 
             for (int i = 0; i < 2; i++)
             {
+
+
                 ConnectDB();
+
                 Thread.Sleep(300000);//Aguarda 5 minutos
+
             }
+            
         }
 
         public static void WriteLog(string log)
@@ -34,8 +39,12 @@ namespace SQL_Server_Job_Monitor
 
             string filePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/SQL Server Job Monitor Log.log";
             StreamWriter writer = new StreamWriter(filePath, true, Encoding.UTF8);
+            
+            
             writer.WriteLine(DateTime.Now.ToString() + " " + log);
             writer.Close();
+            
+
 
         }
 
@@ -148,6 +157,8 @@ namespace SQL_Server_Job_Monitor
 
         }
 
+
+
         public static void MakeCall(string dest)
         {
 
@@ -170,6 +181,7 @@ namespace SQL_Server_Job_Monitor
             CiscoWebDialer.WebdialerSoapServiceClient client = new CiscoWebDialer.WebdialerSoapServiceClient();
             //https://10.22.3.59/webdialer/services/WebdialerSoapService?wsdl
 
+
             Credential cred = new Credential();
             UserProfile profile = new UserProfile();
             cred.userID = "userhelpdesk";
@@ -179,8 +191,10 @@ namespace SQL_Server_Job_Monitor
             profile.user = "userhelpdesk";
             profile.lineNumber = "70009748";
 
+
             ServicePointManager.ServerCertificateValidationCallback
             += new RemoteCertificateValidationCallback(AllwaysGoodCertificate);
+
 
             client.makeCallSoap(cred, number, profile);
 
@@ -193,6 +207,8 @@ namespace SQL_Server_Job_Monitor
             client.Close();
 
             WriteLog("Estado da conexão com o WebService: " + client.State.ToString());
+
+
 
         }
 
