@@ -19,11 +19,11 @@ Inicio a lógica com um loop para que seja realizada 2 tentativas, a primeira pa
 > Alguns jobs possuem *retry* caso haja problemas de conexão e outros erros irrelevantes.
 
 Dentro do loop eu chamo o método `ConnectDB()`, que faz a conexão com o nosso banco de dados e a leitura da tabela de controle que mencionei anteriormente.
-Armazeno o resultado do **SqlDataReader** em uma variável e a passo pelo método `CheckJobs(reader)`.
+Armazeno o resultado do ***SqlDataReader*** em uma variável e a passo pelo método `CheckJobs(reader)`.
 
-O método `CheckJobs(reader)` verifica se a contagem de elementos da lista auxiliar ***jobList*** é maior que zero, se verdadeiro, realiza a ligação para o plantonista atravéz do método *MakeCall(dest)*, se falso, consulta o **SqlDataReader** e verifica se algum Job possui o status de falha. Se verdadeiro, armazena-o na lista **jobList** para ser consultado posteriormente no segundo loop, se falso encerra o método.
+O método `CheckJobs(reader)` verifica se a contagem de elementos da lista auxiliar ***jobList*** é maior que zero, se verdadeiro, realiza a ligação para o plantonista atravéz do método `MakeCall(dest)`, se falso, consulta o ***SqlDataReader*** e verifica se algum Job possui o status de falha. Se verdadeiro, armazena-o na lista ***jobList*** para ser consultado posteriormente no segundo loop, se falso encerra o método.
 
-O método *MakeCall(dest)* recebe o nome do plantonista atual e define a variável *number* com o número do ramal do plantonista atual. Inicia uma instância do **WebdialerSoapServiceClient** e define as credenciais a serem utilizadas pelo WebService. Por fim, passo as credenciais e o número pelo método da API *makeCallSoap* que realiza a ligação para o telefone ramal do plantonista.
+O método `MakeCall(dest)` recebe o nome do plantonista atual e define a variável `number` com o número do ramal do plantonista atual. Inicia uma instância do ***WebdialerSoapServiceClient*** e define as credenciais a serem utilizadas pelo WebService. Por fim, passo as credenciais e o número pelo método da API `makeCallSoap()` que realiza a ligação para o telefone ramal do plantonista.
 > Nas configurações do Call Manager, a linha do plantonista está com desvio para o seu celular.
 
-*O método AllwaysGoodCertificate garante que o certificado exigido durante a conexão com o CUCM seja sempre de confiança.*
+*O método `AllwaysGoodCertificate` garante que o certificado exigido durante a conexão com o CUCM seja sempre de confiança.*
