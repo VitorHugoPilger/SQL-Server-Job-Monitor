@@ -18,7 +18,7 @@ Atravéz da API do WebDialer eu consigo acessar os métodos como *makeCallSoap, 
 Inicio a lógica com um loop para que seja realizada 2 tentativas, a primeira para verificar se um job está com falha e a segunda para confirmar a falha e realizar a ligação.
 > Alguns jobs possuem *retry* caso haja problemas de conexão e outros erros irrelevantes.
 
-Dentro do loop eu chamo o método *ConnectDB()*, que faz a conexão com o nosso banco de dados e a leitura da tabela de controle que mencionei anteriormente.
+Dentro do loop eu chamo o método `ConnectDB()`, que faz a conexão com o nosso banco de dados e a leitura da tabela de controle que mencionei anteriormente.
 Armazeno o resultado do **SqlDataReader** em uma variável e a passo pelo método *CheckJobs(reader)*.
 
 O método *CheckJobs(reader)* verifica se a contagem de elementos da lista auxiliar **jobList** é maior que zero, se verdadeiro, realiza a ligação para o plantonista atravéz do método *MakeCall(dest)*, se falso, consulta o **SqlDataReader** e verifica se algum Job possui o status de falha. Se verdadeiro, armazena-o na lista **jobList** para ser consultado posteriormente no segundo loop, se falso encerra o método.
