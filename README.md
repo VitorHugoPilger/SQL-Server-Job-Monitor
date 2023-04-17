@@ -10,7 +10,7 @@ Com uma tabela de controle, que era utilizada pelo sistema de monitoramento ante
 
 
 ### Cisco WebDialer
-WebDialer é um serviço da cisco que faz parte da instalação geral do servidor Unified Communications Manager (Unified CM). Ele permite que os usuários façam chamadas de de *click to disk* (C2D) em uma página de diretório corporativo ou como parte de um aplicativo de desktop personalizado.
+WebDialer é um serviço da cisco que faz parte da instalação geral do servidor Unified Communications Manager (Unified CM). Ele permite que os usuários façam chamadas de *click to disk* (C2D) em uma página de diretório corporativo ou como parte de um aplicativo de desktop personalizado.
 
 ### O Script
 Atravéz da API do WebDialer eu consigo acessar os métodos como *makeCallSoap, endCallSoap, getProfileSoap*, etc.
