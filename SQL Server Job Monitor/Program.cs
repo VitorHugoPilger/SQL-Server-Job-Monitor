@@ -159,10 +159,8 @@ namespace SQL_Server_Job_Monitor
             profile.user = "USER";
             profile.lineNumber = "RAMAL";
 
-
             ServicePointManager.ServerCertificateValidationCallback
             += new RemoteCertificateValidationCallback(AllwaysGoodCertificate);
-
 
             client.makeCallSoap(cred, number, profile);
 
